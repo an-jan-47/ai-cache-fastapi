@@ -7,6 +7,7 @@ import json
 import hashlib
 import re
 import numpy as np
+from fastapi.middleware.cors import CORSMiddleware
 
 # ----------------------------
 # Config (match assignment)
@@ -25,6 +26,14 @@ MAX_SEM_CANDIDATES = 200
 # App + Redis client
 # ----------------------------
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],          # for assignment/grader; restrict later if needed
+    allow_credentials=False,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 from fastapi import Response
 
 @app.get("/")
