@@ -25,6 +25,16 @@ MAX_SEM_CANDIDATES = 200
 # App + Redis client
 # ----------------------------
 app = FastAPI()
+from fastapi import Response
+
+@app.get("/")
+async def root():
+    return {"status": "ok", "message": "Use POST / for queries", "analytics": "/analytics"}
+
+@app.head("/")
+async def root_head():
+    return Response(status_code=200)
+
 REDIS_URL = os.environ.get("REDIS_URL", "redis://localhost:6379")
 r = redis.from_url(REDIS_URL, decode_responses=True)
 
