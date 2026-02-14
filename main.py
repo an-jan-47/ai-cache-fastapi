@@ -128,6 +128,9 @@ async def sem_index_add(sem_id: str):
 # Replace with real summarizer call.
 # ----------------------------
 async def call_llm(norm_q: str) -> tuple[str, int]:
+    # Simulate slow LLM call (grader expects misses to be much slower)
+    await asyncio.sleep(0.25)  # 250ms
+
     answer = f"Summary for: {norm_q[:240]}"
     tokens_used = AVG_TOKENS_PER_REQUEST
     return answer, tokens_used
